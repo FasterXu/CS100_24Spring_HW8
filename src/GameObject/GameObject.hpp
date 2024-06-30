@@ -223,7 +223,7 @@ public:
       : GameObject(IMGID_REPEATER, x, y, LAYER_PLANTS, 60, 80, ANIMID_IDLE_ANIM, world) { hp = 300; };
   ~Repeater() = default;
   void Update() override;
-  void OnClick() override {};
+  void OnClick() override;
 
 private:
   int tick = 0;

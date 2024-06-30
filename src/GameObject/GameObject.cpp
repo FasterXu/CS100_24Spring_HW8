@@ -106,7 +106,10 @@ void Sunflower::Update()
 
 void Sunflower::OnClick()
 {
-    // If shovel is selected, remove the sunflower.
+    if (world->getHand() == HandType::SHOVEL)
+    {
+        hp = 0;
+    }
 }
 
 void CooldownMask::Update()
@@ -147,7 +150,10 @@ void Peashooter::Update()
 
 void Peashooter::OnClick()
 {
-    // If shovel is selected, remove the sunflower.
+    if (world->getHand() == HandType::SHOVEL)
+    {
+        hp = 0;
+    }
 }
 
 void Pea::Update()
@@ -187,7 +193,10 @@ void Wallnut::Update()
 
 void Wallnut::OnClick()
 {
-    // If shovel is selected, remove the sunflower.
+    if (world->getHand() == HandType::SHOVEL)
+    {
+        hp = 0;
+    }
 }
 
 void CherryBombSeed::OnClick()
@@ -217,7 +226,10 @@ void CherryBomb::Update()
 
 void CherryBomb::OnClick()
 {
-    // If shovel is selected, remove the sunflower.
+    if (world->getHand() == HandType::SHOVEL)
+    {
+        hp = 0;
+    }
 }
 
 void Explosion::Update()
@@ -262,6 +274,14 @@ void Repeater::Update()
         {
             tick -= 1;
         }
+    }
+}
+
+void Repeater::OnClick()
+{
+    if (world->getHand() == HandType::SHOVEL)
+    {
+        hp = 0;
     }
 }
 
