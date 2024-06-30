@@ -178,6 +178,18 @@ LevelStatus GameWorld::Update()
 
 void GameWorld::CleanUp()
 {
+  for (auto it = m_objects.begin(); it != m_objects.end();)
+  {
+    it = m_objects.erase(it);
+  }
+  for (auto it = m_plants.begin(); it != m_plants.end();)
+  {
+    it = m_plants.erase(it);
+  }
+  for (auto it = m_zombies.begin(); it != m_zombies.end();)
+  {
+    it = m_zombies.erase(it);
+  }
   // YOUR CODE HERE
 }
 
