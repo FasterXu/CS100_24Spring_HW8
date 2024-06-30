@@ -54,15 +54,15 @@ LevelStatus GameWorld::Update()
         int rand = randInt(0, P_total);
         if (rand < P1)
         {
-          m_zombies.push_back(std::make_shared<RegularZombie>(randInt(WINDOW_WIDTH - 40, WINDOW_WIDTH - 1), randInt(0, 5) * LAWN_GRID_HEIGHT + FIRST_ROW_CENTER, shared_from_this()));
+          m_zombies.push_back(std::make_shared<RegularZombie>(randInt(WINDOW_WIDTH - 40, WINDOW_WIDTH - 1), FIRST_ROW_CENTER + randInt(0, 4) * LAWN_GRID_HEIGHT, shared_from_this()));
         }
         else if (rand < P1 + P2)
         {
-          // 生成撑杆跳僵尸
+          //
         }
         else
         {
-          // 生成铁桶僵尸
+          //
         }
       }
       zombie_tick = std::max(600 - 20 * m_wave, 150);
@@ -80,6 +80,33 @@ LevelStatus GameWorld::Update()
   for (auto &object : m_zombies)
   {
     object->Update();
+  }
+
+  for (auto &plant : m_plants)
+  {
+    for (auto &zombie : m_zombies)
+    {
+      if (checkCollision(plant, zombie))
+      {
+        printf("Checking\n");
+        switch (plant->Collision())
+        {
+        case 0:
+          zombie->SetEat(true);
+          zombie->PlayAnimation(ANIMID_EAT_ANIM);
+          break;
+        case 1:
+          zombie->setHp(0);
+          break;
+        case 2:
+          zombie->setHp(zombie->getHp() - 20);
+          break;
+
+        default:
+          break;
+        }
+      }
+    }
   }
 
   for (auto it = m_objects.begin(); it != m_objects.end();)
@@ -113,6 +140,32 @@ LevelStatus GameWorld::Update()
     else
     {
       ++it;
+    }
+  }
+
+  for (auto &zombie : m_zombies)
+  {
+    if (zombie->GetX() < 0)
+    {
+      return LevelStatus::LOSING;
+    }
+  }
+
+  for (auto &zombie : m_zombies)
+  {
+    bool collided = false;
+    for (auto &plant : m_plants)
+    {
+      if (checkCollision(zombie, plant))
+      {
+        collided = true;
+        break;
+      }
+    }
+    if (!collided)
+    {
+      zombie->SetEat(false);
+      zombie->PlayAnimation(ANIMID_WALK_ANIM);
     }
   }
 
@@ -161,4 +214,27 @@ HandType GameWorld::getHand()
 void GameWorld::setHand(HandType hand)
 {
   m_hand = hand;
+}
+
+bool GameWorld::checkCollision(std::shared_ptr<GameObject> obj1, std::shared_ptr<GameObject> obj2)
+{
+  int x_dist = std::abs(obj1->GetX() - obj2->GetX());
+  int y_dist = std::abs(obj1->GetY() - obj2->GetY());
+  if (x_dist < (obj1->GetWidth() + obj2->GetWidth()) / 2 && y_dist < (obj1->GetHeight() + obj2->GetHeight()) / 2)
+  {
+    return true;
+  }
+  return false;
+}
+
+bool GameWorld::ZombieOnRight(int x, int y)
+{
+  for (auto &zombie : m_zombies)
+  {
+    if (zombie->GetY() == y && zombie->GetX() >= x)
+    {
+      return true;
+    }
+  }
+  return false;
 }

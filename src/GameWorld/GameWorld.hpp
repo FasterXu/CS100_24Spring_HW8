@@ -38,6 +38,10 @@ public:
 
   void setHand(HandType hand);
 
+  bool checkCollision(std::shared_ptr<GameObject>, std::shared_ptr<GameObject>);
+
+  bool ZombieOnRight(int, int);
+
 private:
   std::list<std::shared_ptr<GameObject>> m_objects;
   std::list<std::shared_ptr<GameObject>> m_plants;

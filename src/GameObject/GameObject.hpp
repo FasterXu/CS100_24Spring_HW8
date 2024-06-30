@@ -29,7 +29,10 @@ public:
   virtual void Update() = 0;
   virtual void OnClick() = 0;
   pGameWorld getShared();
-  int getHp() { return hp; }
+  int getHp() { return hp; };
+  void setHp(int hp) { this->hp = hp; };
+  virtual int Collision() { return 0; };
+  virtual void SetEat(bool) { return; };
 
 protected:
   pGameWorld world;
@@ -99,6 +102,7 @@ public:
   ~Sunflower() = default;
   void Update() override;
   void OnClick() override;
+  int Collision();
 
 private:
   int tick = randInt(30, 600);
@@ -135,6 +139,7 @@ public:
   ~Peashooter() = default;
   void Update() override;
   void OnClick() override;
+  int Collision();
 
 private:
   int tick = 0;
@@ -148,6 +153,7 @@ public:
   ~Pea() = default;
   void Update() override;
   void OnClick() override {};
+  int Collision();
 };
 
 class WallnutSeed : public GameObject
@@ -168,6 +174,7 @@ public:
   ~Wallnut() = default;
   void Update() override;
   void OnClick() override;
+  int Collision();
 };
 
 class CherryBombSeed : public GameObject
@@ -188,6 +195,7 @@ public:
   ~CherryBomb() = default;
   void Update() override;
   void OnClick() override;
+  int Collision() { return 0; };
 
 private:
   int tick = 15;
@@ -201,6 +209,7 @@ public:
   ~Explosion() = default;
   void Update() override;
   void OnClick() override {};
+  int Collision();
 
 private:
   int tick = 3;
@@ -224,6 +233,7 @@ public:
   ~Repeater() = default;
   void Update() override;
   void OnClick() override;
+  int Collision();
 
 private:
   int tick = 0;
@@ -249,6 +259,7 @@ public:
   ~RegularZombie() = default;
   void Update() override;
   void OnClick() override {};
+  void SetEat(bool eat) { this->eat = eat; };
 
 private:
   bool eat = false;

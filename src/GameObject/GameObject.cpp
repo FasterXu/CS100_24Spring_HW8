@@ -113,6 +113,15 @@ void Sunflower::OnClick()
     }
 }
 
+int Sunflower::Collision()
+{
+    if (hp > 0)
+    {
+        hp -= 3;
+    }
+    return 0;
+}
+
 void CooldownMask::Update()
 {
     if (tick == 0)
@@ -140,7 +149,11 @@ void Peashooter::Update()
     {
         if (tick == 0)
         {
-            // whether shoot or not
+            if (world->ZombieOnRight(GetX(), GetY()))
+            {
+                world->AddObject(std::make_shared<Pea>(GetX() + 30, GetY() + 20, world));
+                tick = 30;
+            }
         }
         else
         {
@@ -158,6 +171,15 @@ void Peashooter::OnClick()
     }
 }
 
+int Peashooter::Collision()
+{
+    if (hp > 0)
+    {
+        hp -= 3;
+    }
+    return 0;
+}
+
 void Pea::Update()
 {
     if (hp > 0)
@@ -168,6 +190,13 @@ void Pea::Update()
             hp = 0;
         }
     }
+}
+
+int Pea::Collision()
+{
+    printf("Pea collision\n");
+    hp = 0;
+    return 2;
 }
 
 void WallnutSeed::OnClick()
@@ -200,6 +229,15 @@ void Wallnut::OnClick()
         hp = 0;
         world->setHand(HandType::NONE);
     }
+}
+
+int Wallnut::Collision()
+{
+    if (hp > 0)
+    {
+        hp -= 3;
+    }
+    return 0;
 }
 
 void CherryBombSeed::OnClick()
@@ -245,6 +283,11 @@ void Explosion::Update()
     tick--;
 }
 
+int Explosion::Collision()
+{
+    return 1;
+}
+
 void RepeaterSeed::OnClick()
 {
     if (world->getHand() == HandType::NONE)
@@ -263,8 +306,10 @@ void Repeater::Update()
     {
         if (tick == 0 || tick == 25)
         {
-            // whether shoot or not
-            world->AddObject(std::make_shared<Pea>(GetX(), GetY(), world));
+            if (world->ZombieOnRight(GetX(), GetY()))
+            {
+                world->AddObject(std::make_shared<Pea>(GetX() + 30, GetY() + 20, world));
+            }
             if (tick == 0)
             {
                 tick = 30;
@@ -288,6 +333,15 @@ void Repeater::OnClick()
         hp = 0;
         world->setHand(HandType::NONE);
     }
+}
+
+int Repeater::Collision()
+{
+    if (hp > 0)
+    {
+        hp -= 3;
+    }
+    return 0;
 }
 
 void Shovel::OnClick()
