@@ -73,6 +73,10 @@ LevelStatus GameWorld::Update()
   {
     object->Update();
   }
+  for (auto &object : m_plants)
+  {
+    object->Update();
+  }
   for (auto &object : m_zombies)
   {
     object->Update();
@@ -83,6 +87,28 @@ LevelStatus GameWorld::Update()
     if ((*it)->getHp() <= 0)
     {
       it = m_objects.erase(it);
+    }
+    else
+    {
+      ++it;
+    }
+  }
+  for (auto it = m_plants.begin(); it != m_plants.end();)
+  {
+    if ((*it)->getHp() <= 0)
+    {
+      it = m_plants.erase(it);
+    }
+    else
+    {
+      ++it;
+    }
+  }
+  for (auto it = m_zombies.begin(); it != m_zombies.end();)
+  {
+    if ((*it)->getHp() <= 0)
+    {
+      it = m_zombies.erase(it);
     }
     else
     {
@@ -104,7 +130,7 @@ void GameWorld::CleanUp()
 
 void GameWorld::AddObject(std::shared_ptr<GameObject> object)
 {
-  m_objects.push_back(object);
+  m_plants.push_back(object);
 }
 
 int GameWorld::getFlow()

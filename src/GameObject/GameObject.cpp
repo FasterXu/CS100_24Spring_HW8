@@ -109,6 +109,7 @@ void Sunflower::OnClick()
     if (world->getHand() == HandType::SHOVEL)
     {
         hp = 0;
+        world->setHand(HandType::NONE);
     }
 }
 
@@ -153,6 +154,7 @@ void Peashooter::OnClick()
     if (world->getHand() == HandType::SHOVEL)
     {
         hp = 0;
+        world->setHand(HandType::NONE);
     }
 }
 
@@ -196,6 +198,7 @@ void Wallnut::OnClick()
     if (world->getHand() == HandType::SHOVEL)
     {
         hp = 0;
+        world->setHand(HandType::NONE);
     }
 }
 
@@ -229,6 +232,7 @@ void CherryBomb::OnClick()
     if (world->getHand() == HandType::SHOVEL)
     {
         hp = 0;
+        world->setHand(HandType::NONE);
     }
 }
 
@@ -282,6 +286,7 @@ void Repeater::OnClick()
     if (world->getHand() == HandType::SHOVEL)
     {
         hp = 0;
+        world->setHand(HandType::NONE);
     }
 }
 

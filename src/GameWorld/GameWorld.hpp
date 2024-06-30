@@ -40,6 +40,7 @@ public:
 
 private:
   std::list<std::shared_ptr<GameObject>> m_objects;
+  std::list<std::shared_ptr<GameObject>> m_plants;
   std::list<std::shared_ptr<TextBase>> m_texts;
   std::list<std::shared_ptr<GameObject>> m_zombies;
   TextBase m_sunText = TextBase(60, 520, "50");
