@@ -44,9 +44,10 @@ private:
   std::list<std::shared_ptr<GameObject>> m_zombies;
   TextBase m_sunText = TextBase(60, 520, "50");
   TextBase m_flowText = TextBase(700, 560, "Flow: 0");
-  int m_flow;
+  int m_wave;
   int m_sun;
   int g_time;
+  int zombie_tick = 1200;
   HandType m_hand;
 };
 

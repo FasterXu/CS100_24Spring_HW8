@@ -241,12 +241,12 @@ public:
 
 //-----------------Zombie Comes----------------//
 
-class Zombie : public GameObject
+class RegularZombie : public GameObject
 {
 public:
-  Zombie(int x, int y, pGameWorld world)
+  RegularZombie(int x, int y, pGameWorld world)
       : GameObject(IMGID_REGULAR_ZOMBIE, x, y, LAYER_ZOMBIES, 20, 80, ANIMID_WALK_ANIM, world) { hp = 200; };
-  ~Zombie() = default;
+  ~RegularZombie() = default;
   void Update() override;
   void OnClick() override {};
 

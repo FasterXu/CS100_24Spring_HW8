@@ -297,7 +297,7 @@ void Shovel::OnClick()
     }
 }
 
-void Zombie::Update()
+void RegularZombie::Update()
 {
     if (hp > 0)
     {
