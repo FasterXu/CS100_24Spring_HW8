@@ -41,8 +41,7 @@ public:
 private:
   std::list<std::shared_ptr<GameObject>> m_objects;
   std::list<std::shared_ptr<TextBase>> m_texts;
-  std::shared_ptr<Background> bg;
-  std::shared_ptr<SunflowerSeed> ss;
+  std::list<std::shared_ptr<GameObject>> m_zombies;
   TextBase m_sunText = TextBase(60, 520, "50");
   TextBase m_flowText = TextBase(700, 560, "Flow: 0");
   int m_flow;

@@ -11,17 +11,14 @@ void GameWorld::Init()
   m_sun = 50;
   g_time = 0;
   m_hand = HandType::NONE;
-  bg = std::make_shared<Background>(shared_from_this());
-  m_objects.push_back(bg);
-  ss = std::make_shared<SunflowerSeed>(shared_from_this());
-  m_objects.push_back(ss);
+  m_objects.push_back(std::make_shared<Background>(shared_from_this()));
+  m_objects.push_back(std::make_shared<SunflowerSeed>(shared_from_this()));
   m_objects.push_back(std::make_shared<PeashooterSeed>(shared_from_this()));
   m_objects.push_back(std::make_shared<WallnutSeed>(shared_from_this()));
   m_objects.push_back(std::make_shared<CherryBombSeed>(shared_from_this()));
   m_objects.push_back(std::make_shared<RepeaterSeed>(shared_from_this()));
   m_objects.push_back(std::make_shared<Shovel>(shared_from_this()));
-
-  for (int x = 0; x < 3; x++)
+  for (int x = 0; x < 9; x++)
   {
     for (int y = 0; y < 5; y++)
     {

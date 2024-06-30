@@ -241,4 +241,17 @@ public:
 
 //-----------------Zombie Comes----------------//
 
+class Zombie : public GameObject
+{
+public:
+  Zombie(int x, int y, pGameWorld world)
+      : GameObject(IMGID_REGULAR_ZOMBIE, x, y, LAYER_ZOMBIES, 20, 80, ANIMID_WALK_ANIM, world) { hp = 200; };
+  ~Zombie() = default;
+  void Update() override;
+  void OnClick() override {};
+
+private:
+  bool eat = false;
+};
+
 #endif // !GAMEOBJECT_HPP__

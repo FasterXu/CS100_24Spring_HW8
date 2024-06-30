@@ -277,4 +277,15 @@ void Shovel::OnClick()
     }
 }
 
+void Zombie::Update()
+{
+    if (hp > 0)
+    {
+        if (!eat)
+        {
+            MoveTo(GetX() - 1, GetY());
+        }
+    }
+}
+
 // Your everything begins from here.
