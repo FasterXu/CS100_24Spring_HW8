@@ -1,0 +1,10 @@
+^C:\USERS\XU CHENHAO\DOCUMENTS\C++\HW8_V1\THIRD_PARTY\FREEGLUT\CMAKELISTS.TXT
+setlocal
+"D:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/Xu Chenhao/Documents/C++/hw8_v1" "-BC:/Users/Xu Chenhao/Documents/C++/hw8_v1/build" --check-stamp-file "C:/Users/Xu Chenhao/Documents/C++/hw8_v1/build/freeglut/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
