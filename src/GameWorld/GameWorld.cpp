@@ -10,6 +10,7 @@ void GameWorld::Init()
   m_wave = 0;
   m_sun = 50;
   g_time = 0;
+  zombie_tick = 1200;
   m_hand = HandType::NONE;
   m_objects.push_back(std::make_shared<Background>(shared_from_this()));
   m_objects.push_back(std::make_shared<SunflowerSeed>(shared_from_this()));
@@ -58,11 +59,11 @@ LevelStatus GameWorld::Update()
         }
         else if (rand < P1 + P2)
         {
-          //
+          m_zombies.push_back(std::make_shared<BucketHeadZombie>(randInt(WINDOW_WIDTH - 40, WINDOW_WIDTH - 1), FIRST_ROW_CENTER + randInt(0, 4) * LAWN_GRID_HEIGHT, shared_from_this()));
         }
         else
         {
-          //
+          m_zombies.push_back(std::make_shared<PoleVaultingZombie>(randInt(WINDOW_WIDTH - 40, WINDOW_WIDTH - 1), FIRST_ROW_CENTER + randInt(0, 4) * LAWN_GRID_HEIGHT, shared_from_this()));
         }
       }
       zombie_tick = std::max(600 - 20 * m_wave, 150);
@@ -88,7 +89,6 @@ LevelStatus GameWorld::Update()
     {
       if (checkCollision(plant, zombie))
       {
-        printf("Checking\n");
         switch (plant->Collision())
         {
         case 0:
@@ -249,4 +249,9 @@ bool GameWorld::ZombieOnRight(int x, int y)
     }
   }
   return false;
+}
+
+std::list<std::shared_ptr<GameObject>> GameWorld::getPlants()
+{
+  return m_plants;
 }

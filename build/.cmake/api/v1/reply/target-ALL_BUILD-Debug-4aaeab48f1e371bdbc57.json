@@ -17,10 +17,10 @@
 	"dependencies" : 
 	[
 		{
-			"id" : "freeglut_static::@9f489802bb4ec236f2d4"
+			"id" : "freeglut::@9f489802bb4ec236f2d4"
 		},
 		{
-			"id" : "freeglut::@9f489802bb4ec236f2d4"
+			"id" : "freeglut_static::@9f489802bb4ec236f2d4"
 		},
 		{
 			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"

@@ -88,6 +88,10 @@ void SunflowerSeed::OnClick()
             world->setHand(HandType::SUNFLOWER);
         }
     }
+    else
+    {
+        world->setHand(HandType::NONE);
+    }
     return;
 }
 
@@ -139,6 +143,10 @@ void PeashooterSeed::OnClick()
         {
             world->setHand(HandType::PEASHOOTER);
         }
+    }
+    else
+    {
+        world->setHand(HandType::NONE);
     }
     return;
 }
@@ -194,7 +202,6 @@ void Pea::Update()
 
 int Pea::Collision()
 {
-    printf("Pea collision\n");
     hp = 0;
     return 2;
 }
@@ -207,6 +214,10 @@ void WallnutSeed::OnClick()
         {
             world->setHand(HandType::WALLNUT);
         }
+    }
+    else
+    {
+        world->setHand(HandType::NONE);
     }
     return;
 }
@@ -248,6 +259,10 @@ void CherryBombSeed::OnClick()
         {
             world->setHand(HandType::CHERRY_BOMB);
         }
+    }
+    else
+    {
+        world->setHand(HandType::NONE);
     }
     return;
 }
@@ -296,6 +311,10 @@ void RepeaterSeed::OnClick()
         {
             world->setHand(HandType::REPEATER);
         }
+    }
+    else
+    {
+        world->setHand(HandType::NONE);
     }
     return;
 }
@@ -364,6 +383,90 @@ void RegularZombie::Update()
         {
             MoveTo(GetX() - 1, GetY());
         }
+    }
+}
+
+void RegularZombie::OnClick()
+{
+    if (world->getHand() == HandType::SHOVEL)
+    {
+        hp = 0;
+        world->setHand(HandType::NONE);
+    }
+}
+
+void BucketHeadZombie::Update()
+{
+    if (hp > 0)
+    {
+        if (hp <= 200)
+        {
+            ChangeImage(IMGID_REGULAR_ZOMBIE);
+        }
+        if (!eat)
+        {
+            MoveTo(GetX() - 1, GetY());
+        }
+    }
+}
+
+void BucketHeadZombie::OnClick()
+{
+    if (world->getHand() == HandType::SHOVEL)
+    {
+        hp = 0;
+        world->setHand(HandType::NONE);
+    }
+}
+
+void PoleVaultingZombie::Update()
+{
+    if (hp > 0)
+    {
+        MoveTo(GetX() - 40, GetY());
+        for (auto &object : world->getPlants())
+        {
+            if (world->checkCollision(shared_from_this(), object) && !walk)
+            {
+                if (tick == 42 & jump == false)
+                {
+                    PlayAnimation(ANIMID_JUMP_ANIM);
+                    jump = true;
+                }
+                eat = true;
+                if (tick == 0 && walk == false)
+                {
+                    PlayAnimation(ANIMID_WALK_ANIM);
+                    walk = true;
+                    MoveTo(GetX() - 150, GetY());
+                }
+                else
+                {
+                    tick--;
+                }
+            }
+        }
+        MoveTo(GetX() + 40, GetY());
+        if (!eat)
+        {
+            if (walk)
+            {
+                MoveTo(GetX() - 1, GetY());
+            }
+            else
+            {
+                MoveTo(GetX() - 2, GetY());
+            }
+        }
+    }
+}
+
+void PoleVaultingZombie::OnClick()
+{
+    if (world->getHand() == HandType::SHOVEL)
+    {
+        hp = 0;
+        world->setHand(HandType::NONE);
     }
 }
 

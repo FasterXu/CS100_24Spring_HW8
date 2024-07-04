@@ -42,6 +42,8 @@ public:
 
   bool ZombieOnRight(int, int);
 
+  std::list<std::shared_ptr<GameObject>> getPlants();
+
 private:
   std::list<std::shared_ptr<GameObject>> m_objects;
   std::list<std::shared_ptr<GameObject>> m_plants;
@@ -52,7 +54,7 @@ private:
   int m_wave;
   int m_sun;
   int g_time;
-  int zombie_tick = 1200;
+  int zombie_tick;
   HandType m_hand;
 };
 

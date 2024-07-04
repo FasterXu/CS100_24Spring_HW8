@@ -258,11 +258,42 @@ public:
       : GameObject(IMGID_REGULAR_ZOMBIE, x, y, LAYER_ZOMBIES, 20, 80, ANIMID_WALK_ANIM, world) { hp = 200; };
   ~RegularZombie() = default;
   void Update() override;
-  void OnClick() override {};
+  void OnClick() override;
   void SetEat(bool eat) { this->eat = eat; };
 
 private:
   bool eat = false;
+};
+
+class BucketHeadZombie : public GameObject
+{
+public:
+  BucketHeadZombie(int x, int y, pGameWorld world)
+      : GameObject(IMGID_BUCKET_HEAD_ZOMBIE, x, y, LAYER_ZOMBIES, 20, 80, ANIMID_WALK_ANIM, world) { hp = 1300; };
+  ~BucketHeadZombie() = default;
+  void Update() override;
+  void OnClick() override;
+  void SetEat(bool eat) { this->eat = eat; };
+
+private:
+  bool eat = false;
+};
+
+class PoleVaultingZombie : public GameObject
+{
+public:
+  PoleVaultingZombie(int x, int y, pGameWorld world)
+      : GameObject(IMGID_POLE_VAULTING_ZOMBIE, x, y, LAYER_ZOMBIES, 20, 80, ANIMID_RUN_ANIM, world) { hp = 340; };
+  ~PoleVaultingZombie() = default;
+  void Update() override;
+  void OnClick() override;
+  void SetEat(bool eat) { this->eat = eat; };
+
+private:
+  bool eat = false;
+  bool walk = false;
+  bool jump = false;
+  int tick = 42;
 };
 
 #endif // !GAMEOBJECT_HPP__
